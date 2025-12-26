@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f7;
+}
+
+.login-page {
+    text-align: center;
+    background-color: #fff;
+}
+
+.header {
+    background-color: #f0f4f7;
+    padding: 20px 0;
+}
+
+.logo {
+    width: 80px;
+}
+
+h1,
+h3 {
+    color: #0078d7;
+    margin: 10px 0;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 150px);
+}
+
+.login-box {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 300px;
+    text-align: left;
+}
+
+footer {
+    padding: 10px 0;
+    background-color: #f0f4f7;
+    color: #999;
+    font-size: 14px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* 全局字体样式 */
+.custom-text {
+    font-family: 'Source Han Sans-Regular';
+    font-weight: 400;
+    /* 字重 400 */
+    font-size: 14px;
+    /* 字号 14px */
+    line-height: 15px;
+    /* 行高 15px */
+    color: #666666;
+    /* 字体颜色 */
+    display: flex;
+    /* 用 flex 来保证垂直居中 */
+    align-items: center;
+    /* 垂直居中对齐 */
+}
+
+/* 表格分页按钮选中状态背景颜色 */
+.ant-pagination-item-active {
+    background-color: #D3E2FF !important;
+    /* 点击/选中背景 */
+    border-color: #D3E2FF !important;
+    color: #000000;
+    /* 可根据需要修改文字颜色 */
+}
+
+/* 表格分页按钮悬停状态背景颜色 */
+.ant-pagination-item:hover {
+    background-color: #D3E2FF !important;
+    border-color: #D3E2FF !important;
+}

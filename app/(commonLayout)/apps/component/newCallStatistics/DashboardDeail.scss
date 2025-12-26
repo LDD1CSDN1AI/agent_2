@@ -1,0 +1,42 @@
+    .DashboardDeail {
+        .div-css {
+            width: 100%;
+            background-color: white;
+            border-radius: 4px;
+        }
+
+
+        .info-part-two {
+            width: 36%;
+            padding: 4px;
+            height: 160px;
+
+            .TotalInterfaces {
+                // position: absolute;
+                // top: 48%;
+                // left: 20%;
+                margin: 0 16px;
+            }
+
+            .info-part-modal {
+                top: 40px;
+                width: 16%;
+                height: 140px;
+                position: absolute;
+            }
+
+            .part-5 {
+                left: 16px;
+                margin-top: 16px;
+            }
+
+            .part-6 {
+                left: 240px;
+                margin-top: 16px;
+            }
+        }
+
+        .ant-card-head {
+            padding: 0 !important;
+        }
+    }

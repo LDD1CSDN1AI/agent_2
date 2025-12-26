@@ -1,0 +1,31 @@
+.openingStatementInputBox {
+    background-color: white;
+}
+
+.openingStatementInput {
+    width: 100%;
+    border: 1px solid #dcdfe6;
+    border-radius: 3px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    resize: none;
+}
+
+.openingStatementInput::placeholder {
+    color: rgb(208 213 221);
+    font-size: 14px;
+}
+
+.openingStatementInput:focus {
+    outline: none;
+}
+
+.openingStatementInputNode {
+    color: #909090;
+    font-size: 12px;
+    padding: 6px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

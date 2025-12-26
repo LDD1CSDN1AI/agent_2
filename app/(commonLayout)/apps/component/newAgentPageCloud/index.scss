@@ -1,0 +1,25 @@
+.newAgentPage {
+    
+    padding: 12px;
+    height: 100%;
+    width: 100%;
+
+    .newAgentPage-inner {
+            height: 100%;
+            width: 100%;
+
+        .newAgentPage-inner-span {
+            margin-right: 16px;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+.only-show-two {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+}

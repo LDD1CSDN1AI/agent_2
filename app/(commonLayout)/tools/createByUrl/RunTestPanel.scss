@@ -1,0 +1,113 @@
+/* File: RunTestPanel.scss */
+.run-test-panel {
+    display: flex;
+    background: #fff;
+    border-top: 1px solid #eee;
+    border-radius: 8px;
+    gap: 24px;
+
+    .left-panel {
+        width: 45%;
+        border-right: 1px solid #f0f0f0;
+        padding-right: 24px;
+
+        .title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .params-title {
+            margin-top: 16px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-family: 'Source Han Sans-Medium ';
+            font-weight: 500;
+            color: #333333;
+            font-size: 14px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .param-list {
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+            gap: 12px;
+
+            .parameter {
+                .parameter-name {
+                    display: inline-block;
+                    min-width: 120px;
+                    max-width: 180px;
+                    overflow: hidden;
+                    color: #666666;
+                    white-space: nowrap;
+                    text-overflow: ellipsis
+                }
+            }
+
+            .param-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+
+                .param-name {
+                    min-width: 120px;
+                    max-width: 180px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    font-size: 14px;
+
+                    .required {
+                        color: red;
+                    }
+                }
+
+                .param-input {
+                    flex: 1;
+                }
+            }
+        }
+    }
+
+    .right-panel {
+        width: 55%;
+        min-width: 55%;
+        max-width: 55%;
+        padding-left: 16px;
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+            margin-bottom: 12px;
+
+            .result-title {
+                font-family: 'Source Han Sans-Medium';
+                font-weight: 500;
+                color: #333333;
+                font-size: 14px;
+            }
+        }
+
+        pre {
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+
+        .empty {
+            .ant-empty-image {
+                display: flex;
+                margin-top: 64px;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}

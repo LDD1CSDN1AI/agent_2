@@ -1,0 +1,23 @@
+.memberSelector {
+  :global {
+    .ant-select {
+      .ant-select-selector {
+        border: none;
+      }
+    }
+
+    .ant-select-selector {
+      border: none;
+    }
+
+    .ant-table-wrapper {
+      .ant-table {
+        .ant-table-container {
+          .ant-table-body {
+            // min-height: 600px;
+          }
+        }
+      }
+    }
+  }
+}

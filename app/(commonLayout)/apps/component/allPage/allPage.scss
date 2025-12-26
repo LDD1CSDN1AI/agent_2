@@ -1,0 +1,30 @@
+.message-content {
+  border-radius: 16px;
+  margin-top: -38px;
+  background-color: rgba(203, 220, 252, 0.19);
+  display: flex;
+  flex-direction: row;
+}
+
+
+.marquee {
+    height: 32px;
+    line-height: 32px;
+    width: 100%; /* 或指定一个具体的宽度 */
+    overflow: hidden; /* 隐藏溢出的内容 */
+    white-space: nowrap; /* 防止文本换行 */
+    box-sizing: border-box; /* 确保padding和border不影响宽度 */
+    color: #1677ff;
+  }
+   
+  .marquee-content {
+    margin: 0 32px;
+    display: inline-block;
+    padding-left: 100%; /* 开始时完全向右 */
+    animation: marquee 80s linear infinite; /* 动画名称、持续时间、速度曲线和重复次数 */
+  }
+   
+  @keyframes marquee {
+    from { transform: translateX(0); } /* 开始位置 */
+    to { transform: translateX(-100%); } /* 结束位置，根据内容宽度调整 */
+  }

@@ -1,0 +1,48 @@
+.radio-button-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.radio-button {
+    width: 110px;
+    height: 50px;
+    line-height: 25px;
+    text-align: left;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    // background: url("../../../../../public/image/编组\ 5备份\ 3.png");
+}
+
+.radio-button.selected {
+    background-color: #f0f0f0;
+    /* 选中时的背景颜色 */
+    border-color: #007bff;
+    /* 选中时的边框颜色 */
+}
+
+.agent-chat {
+    cursor: pointer;
+    background: url("../../../../../public/image/agent_card_bg.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.chat {
+    cursor: pointer;
+    background: url("../../../../../public/image/chat_card-bg.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.workflow {
+    cursor: pointer;
+    background: url("../../../../../public/image/workflow_card_bg.png");
+    background-size: cover;
+    background-position: center;
+
+}
+

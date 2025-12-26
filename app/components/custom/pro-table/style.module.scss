@@ -1,0 +1,44 @@
+.proTable {
+    :global {
+        .ant-select {
+            .ant-select-selector {
+                border: none;
+            }
+            .ant-select-outlined {
+                border: none;
+            }
+        }
+        .ant-select-focused:where(.css-dev-only-do-not-override-11lehqq) {
+            .ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(
+                    .ant-pagination-size-changer
+                ) {
+                .ant-select-selector {
+                    border: none;
+                }
+            }
+        }
+
+        .ant-table-container {
+            .ant-table-header {
+                table {
+                    thead {
+                        tr {
+                            th {
+                                background: none;
+                                border-bottom: 1px solid #d7d7d7;
+                            }
+
+                            .ant-table-cell::before {
+                                width: 0px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .ant-table-body {
+                //   min-height: 600px;
+            }
+        }
+    }
+}

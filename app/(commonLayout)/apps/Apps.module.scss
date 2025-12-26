@@ -1,0 +1,61 @@
+.leftContainer {
+    width: 100%;
+    height: 100%;
+
+    :global {
+        .ant-layout {
+            position: relative;
+
+            &>.ant-layout-sider {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            &>.ant-layout.miantainer {
+                margin-left: 200px;
+            }
+        }
+
+        .ant-menu-item {
+            // margin: 5px 0;
+        }
+
+        .ant-layout-sider-children {
+//                      display: flex;
+//                      flex-direction: column;
+                }
+
+        .ant-menu-item-group {
+            padding: 0 14px;
+            margin-top: 16px;
+        }
+
+        .ant-menu-item-group-title {
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            padding: 10px 0;
+        }
+
+        .h-full {
+            height: 100%;
+        }
+        :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light .ant-menu-item-selected, :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light>.ant-menu .ant-menu-item-selected{
+
+            background-color: #e6f4ff
+        }
+    }
+}
+
+.primary {
+    padding: 14px;
+}
+
+.tansuo {
+    line-height: 22px;
+    font-size: 14px;
+    color: #999999;
+    padding-left: 14px;
+    margin-top: 5px;
+
+}
+// :where(.css-dev-only-do-not-override-11lehqq).ant-menu-inline .ant-menu-item, :where(.css-dev-only-do-not-override-11lehqq).ant-menu-vertical .ant-menu-item, :where(.css-dev-only-do-not-override-11lehqq).ant-menu-inline .ant-menu-submenu-title, :where(.css-dev-only-do-not-override-11lehqq).ant-menu-vertical .ant-menu-submenu-title

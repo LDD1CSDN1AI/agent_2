@@ -1,0 +1,17 @@
+.mineTbody.active tr:nth-child(n + 4) td:first-child {
+    position: relative;
+    left: 50px;
+    background-color: #fff;
+    width: 110px;
+    padding-top: 6px;
+    display: block;
+}
+
+.mineTbody tr:nth-child(n + 8) td:first-child {
+    position: relative;
+    /* left: 50px; */
+    background-color: #fff;
+    /* width: 110px; */
+    padding-top: 6px;
+    display: block;
+}

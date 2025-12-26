@@ -1,0 +1,281 @@
+.study-base-process-page-container {
+    padding: 24px;
+}
+
+.study-base-process-page-container .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.study-base-process-page-container .back-title {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.study-base-process-page-container .header-actions button {
+    margin-left: 8px;
+}
+
+.study-base-process-page-container .steps-nav {
+    margin-bottom: 40px;
+    padding: 0 334px !important;
+}
+
+
+.study-base-process-page-container .steps-nav :global(.ant-steps-item) {
+    /* padding-top: 32px; */
+}
+
+.study-base-process-page-container .steps-nav :global(.ant-steps-item-title) {
+    position: absolute;
+    top: -40px;
+    left: 30px;
+}
+
+.study-base-process-page-container .steps-nav :global(.ant-steps-item-icon) {
+    position: relative !important;
+    width: 65px !important;
+    height: 65px !important;
+    /* background: #f0f0f0 !important; */
+    /* border: 2px dashed #e8e8e8 !important; */
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.study-base-process-page-container .steps-nav :global(.ant-steps-item-active .ant-steps-item-icon) {
+    /* background: #1890ff !important;
+    border-color: #1890ff !important; */
+}
+
+.study-base-process-page-container .steps-nav :global(.ant-steps-item-finish .ant-steps-item-icon) {
+    /* background: #1890ff !important;
+    border-color: #1890ff !important; */
+}
+
+.study-base-process-page-container .step-icon {
+    width: 65px;
+    height: 65px;
+    max-width: 65px;
+
+}
+
+.study-base-process-page-container .steps-nav :global(.ant-steps-item-icon) :global(.ant-steps-icon) {
+    /* top: 50% !important;
+    left: 50% !important; */
+    transform: translate(-50%, -50%) !important;
+    top: -13px !important;
+    left: -17px;
+}
+
+.study-base-process-page-container .content-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    height: calc(100vh - 160px);
+    /* 减去header和steps的高度 */
+    background: #fff;
+    border-radius: 8px;
+}
+
+/* 美化滚动条样式（可选） */
+.content-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.content-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.content-container::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+.study-base-process-page-container .upload-container {
+    text-align: center;
+}
+
+.study-base-process-page-container .upload-area {
+    padding: 40px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.study-base-process-page-container .upload-icon {
+    width: 47px;
+    height: 32px;
+    display: block;
+    margin: 0 auto;
+    /* 水平居中 */
+}
+
+.study-base-process-page-container .upload-hint {
+    color: #999;
+    font-size: 12px;
+}
+
+.study-base-process-page-container .config-container {
+    padding: 24px;
+}
+
+.study-base-process-page-container .section {
+    margin-bottom: 24px;
+}
+
+.study-base-process-page-container .section h3 {
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: normal;
+    color: #1D2129;
+}
+
+.study-base-process-page-container .section :global(.ant-radio-group) {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.study-base-process-page-container .section :global(.ant-radio-button-wrapper) {
+    height: auto;
+    padding: 16px;
+    text-align: left;
+    border-radius: 8px !important;
+    width: 100%;
+    border: 1px solid #E5E6E8 !important;
+}
+
+.study-base-process-page-container .section :global(.ant-radio-button-wrapper:not(:first-child)::before) {
+    display: none;
+}
+
+.study-base-process-page-container .section :global(.ant-radio-button-wrapper-checked) {
+    background: #F5F8FF !important;
+    border-color: #216EFF !important;
+    color: #216EFF !important;
+}
+
+.study-base-process-page-container .section :global(.ant-radio-button-wrapper span:last-child) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.study-base-process-page-container .section :global(.ant-radio-button-wrapper span:last-child::after) {
+    content: attr(data-desc);
+    font-size: 12px;
+    color: #86909C;
+}
+
+.study-base-process-page-container .steps-nav :global(.ant-steps-item-active .ant-steps-item-title) {
+    color: #216EFF !important;
+}
+
+.study-base-process-page-container .steps-nav :global(.ant-steps-item-finish .ant-steps-item-title) {
+    color: #216EFF !important;
+}
+
+.study-base-process-page-container .section :global(.ant-radio-button-wrapper-disabled) {
+    background: #F7F8FA !important;
+    border-color: #E5E6E8 !important;
+    cursor: not-allowed !important;
+}
+
+.study-base-process-page-container .section :global(.ant-radio-button-wrapper-disabled span) {
+    color: #C9CDD4 !important;
+}
+
+.study-base-process-page-container .section :global(.ant-radio-button-wrapper-disabled span::after) {
+    color: #C9CDD4 !important;
+}
+
+.study-base-process-page-container .upload-container :global(.ant-upload-list) {
+    text-align: left;
+}
+
+.study-base-process-page-container .upload-container :global(.ant-upload-list-text-container) {
+    text-align: left;
+}
+
+.study-base-process-page-container .process-container {
+    padding: 24px;
+}
+
+.processing-status {
+    text-align: left;
+}
+
+.processing-status h3 {
+    font-size: 16px;
+    color: #1D2129;
+    margin-bottom: 24px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: #F7F8FA;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.file-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+}
+
+.file-icon img {
+    width: 100%;
+    height: 100%;
+}
+
+.file-info {
+    flex: 1;
+}
+
+.file-name {
+    font-size: 14px;
+    color: #1D2129;
+    margin-bottom: 4px;
+}
+
+.file-size {
+    font-size: 12px;
+    color: #86909C;
+}
+
+.file-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.loading-icon {
+    color: #216EFF;
+    font-size: 16px;
+}
+
+.success-icon {
+    color: #00B42A;
+    font-size: 16px;
+}
+.error-icon {
+    color: #963a23;
+    font-size: 16px;
+}
+/* .file-status span {
+    font-size: 14px;
+    color: #00B42A;
+} */

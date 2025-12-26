@@ -1,0 +1,126 @@
+.operation-management {
+    width: 100%;
+    overflow: hidden;
+}
+
+.headMod {
+    width: 100%;
+    max-height: 160px;
+    display:  flex;
+    margin: 0 4px;
+    padding: 8px 4px;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    border-radius: 4px;
+
+    .headMod-image {
+        width: 50%;
+        display: flex;
+        margin-right: 4px;
+        justify-content: flex-end;
+    }
+
+    .headMod-text {
+        width: 50%;
+        margin-left: 4px;
+
+        .headMod-text-name {
+            font-weight: 700;
+        }
+
+        .headMod-text-num {
+            color: #1677ff;
+        }
+    }
+}
+
+.echarts {
+    background-color: white;
+    margin: 32px 0 0 0;
+    padding: 8px;
+    border-radius: 4px;
+
+    .echarts-header {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 4px 0px 0 0px;
+    }
+
+    .echarts-userStatistics {
+        width: 100%;
+        height: 300px;
+        margin-top: 16px;
+        background-color: white;
+    }
+}
+
+.footer {
+    background-color: white;
+    margin-top: 32px;
+    padding: 8px;
+    border-radius: 4px;
+    width: 100%;
+
+    .footer-header {
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .footer-content {
+        width: 100%;
+        margin-left: 16px;
+
+        .footerCard {
+            max-width: 900px;
+            margin-top: 8px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .footerCard-index {
+            text-align: center;
+            width: 20px;
+        }
+
+        .footerCard-appName, .footerCard-company {
+            width: calc(50% - 130px);
+            padding-left: 4px;
+        }
+
+        .footerCard-person, .footerCard-callNum {
+            padding-left: 4px;
+            width: 120px;
+        }
+
+        .borderRadius {
+            border-radius: 50%;
+            color: white;
+        }
+
+        .backGoundOrange {
+            background-color: orange;
+        }
+
+        .backGoundGreen {
+            background-color: green;
+        }
+
+        .backGoundBule {
+            background-color: blue;
+        }
+
+        .orange {
+            color: orange;
+        }
+
+        .green {
+            color: green;
+        }
+
+        .blue {
+            color: blue;
+        }
+    }
+}

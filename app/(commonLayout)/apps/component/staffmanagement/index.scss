@@ -1,0 +1,29 @@
+.operation-management {
+    width: 100%;
+    overflow: hidden;
+    background: #f5f6f9;
+}
+.text-user{
+
+  justify-content: space-between;
+  font-weight: 700;
+  background-color: white; 
+  padding: 20px;
+   margin: 20px; 
+   border-radius: 8px;
+   display: flex;
+    align-items: center;
+}
+
+.operation-title{
+    display: flex;
+    justify-content: space-between;
+    padding:0px 20px;
+    .operation-bouutm{
+        border: 1px solid #216eff;
+        padding: 7px 10px;
+        border-radius: 5px;
+        background: #cfdcf7;
+        color:#216eff ;
+    }
+}

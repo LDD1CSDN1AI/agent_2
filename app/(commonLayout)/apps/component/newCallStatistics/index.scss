@@ -1,0 +1,141 @@
+.div-css {
+    width: 100%;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.newCallStatistics-OverallView-allInfo {
+    font-family: Source Han Sans, Source Han Sans;
+    display: flex;
+    color: #1C2748;
+    flex-direction: row;
+    width: 100%;
+    height: 216px;
+    justify-content: space-between;
+
+    .info-part-one {
+        width: 62%;
+        height: 100%;
+        padding: 4px;
+
+        .TotalInterfaces {
+            // position: absolute;
+            // top: 48%;
+            // left: 20%;
+            margin: 0 16px;
+        }
+
+        .info-part-modal {
+            width: 20%;
+            height: 140px;
+            top: 20px;
+            position: absolute;
+        }
+
+        .part-1 {
+            left: 18%;
+        }
+
+        .part-2 {
+            left: 40%;
+        }
+
+        .part-3 {
+            left: 60%;
+        }
+
+        .part-4 {
+            left: 80%;
+        }
+    }
+
+    .info-part-two {
+        width: 36%;
+        padding: 4px;
+        height: 216px;
+
+        .TotalInterfaces {
+            // position: absolute;
+            // top: 48%;
+            // left: 20%;
+            margin: 0 16px;
+        }
+
+        .info-part-modal {
+            top: 20px;
+            width: 16%;
+            height: 140px;
+            position: absolute;
+        }
+
+        .part-5 {
+            left: 65%;
+            margin-top: 16px;
+        }
+
+        .part-6 {
+            left: 80%;
+            margin-top: 16px;
+        }
+    }
+}
+
+.contentNum {
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+
+}
+
+.show-dashed {
+    border-left: 2px dashed #d9d9d9;
+}
+
+.ant-space {
+    width: 100%;
+    padding: 8px;
+}
+
+.only-show-one {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.two-part {
+    padding: 8px;
+
+    .two-part-title {
+        margin: 4px 0;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .two-part-echarts {
+        width: 100%;
+        height: 300px;
+    }
+}
+
+.third-part {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px;
+
+    .third-part-title {
+        margin: 4px 0;
+        font-size: 16px;
+        font-family: Source Han Sans-Bold;
+        font-weight: 700;
+    }
+
+    & .text-center {
+        text-align: center !important;
+    }
+}

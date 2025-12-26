@@ -1,0 +1,112 @@
+.page-container {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.header-text p {
+    margin: 0;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: white;
+}
+
+.text-and-image-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-line {
+    margin-bottom: 10px; // 调整行间距
+    align-items: center;
+    margin-bottom: 10px; // 调整行间距
+}
+
+.text-line1 {
+    margin-bottom: 10px; // 调整行间距
+    align-items: center;
+    margin-bottom: 10px; // 调整行间距
+    display: flex;
+}
+
+
+
+.blue-text {
+    color: #1677ff;
+    font-weight: bold;
+}
+
+.add-btn {
+    margin-left: auto; // 使按钮靠右
+}
+
+
+.list {
+    margin-top: 20px;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+}
+
+.list-item-img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.delete-text {
+    color: red;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.delete-text:hover {
+    text-decoration: underline;
+}
+
+.header-image {
+    width: 12px; // 控制图片宽度
+    height: 12px; // 自动调整高度
+}
+
+.left-image {
+    width: 73px; // 控制左侧图片的宽度
+    height: auto; // 自动调整高度，保持比例
+    margin-right: 15px; // 图片与文字之间的间距
+}
+
+.left-symbol {
+    font-size: 30px; // 控制 < 的字体大小
+    margin-right: 10px; // < 与图片之间的间距
+}
