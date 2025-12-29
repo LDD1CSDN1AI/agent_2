@@ -111,6 +111,10 @@ const Apps = () => {
     tags: string[],
     activeId: any
   ) => {
+      // 从 LocalStorage 读取 tabClick
+    const currentTabClick = typeof window !== 'undefined' 
+    ? localStorage.getItem('areaTabType') || '1' 
+    : '1';
     if (!pageIndex || previousPageData.has_more) {
       const params: any = {
         url: '/apps',
@@ -119,6 +123,10 @@ const Apps = () => {
           limit: activeTab === 'area' || activeTab === 'workSpaceSecondPage' ? 100 : 9,
         },
       };
+
+
+
+
 
       if (category === 'workSpaceSecondPage') {
         params.params.tenant_id = activeId.id || tenantId;
@@ -148,6 +156,36 @@ const Apps = () => {
 
       if (activeTab === 'share-chat' && tabClick === 'chat') {
         delete params.params;
+      }
+
+
+
+      console.log("activeTab------------------------>",activeTab)
+    
+      console.log("activeArea------------------------>",activeArea)
+      // params.params.mode = 'agent-chat';
+      // 个人空间场景下，根据选中的应用类型筛选
+      if (activeTab === 'area') {
+        delete params.params.mode;
+        params.params.tenant_id = activeArea; // 筛选当前空间下的应用
+        console.log("tabClick------------------------>",tabClick)
+        // if(tabClick==='agent-chat'){
+        //   params.params.mode = 'agent-chat';
+        // }
+        // 根据标签页类型添加 mode 筛选
+        switch (currentTabClick) {
+          case '1': // Agent 标签页
+            params.params.mode = 'agent-chat';
+            break;
+          case '3': // 工作流标签页
+            params.params.mode = 'workflow';
+            break;
+          case '5': // 对话流标签页
+            params.params.mode = 'advanced-chat';
+            break;
+          default:
+            break;
+        }
       }
       return params;
     }

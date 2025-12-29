@@ -42,7 +42,7 @@ const AreaPage: React.FC<Props> = (props) => {
   const [openModal, setOpenModal] = useState<boolean>(false)
   // const pathName = usePathname()
   const [activeArea, setActiveArea] = useState<any>('')
-  const [tabClick, setTabClick] = useState<string>('1')
+  // const [tabClick, setTabClick] = useState<string>('1')
   const [showCreateFromDSLModal, setShowCreateFromDSLModal] = useState(false)
 
   const [isAddOpen, setIsAddOpen] = useState<OpenTypes>({
@@ -53,6 +53,28 @@ const AreaPage: React.FC<Props> = (props) => {
   const [areaName, setAreaName] = useState<Array<areaNameItem>>([])
 
   const { data: tenants, mutate: tenantsMutate }: any = useSwr('/getTenants', getTenants)
+  // 组件挂载时，从 LocalStorage 读取 tabClick，默认值为 '1'
+  const [tabClick, setTabClick] = useState(() => {
+    if (typeof window !== 'undefined') { // 避免 Next.js 服务端渲染报错
+      return localStorage.getItem('areaTabType') || '1';
+    }
+    return '1';
+  });
+    // 新增：选项卡切换时触发数据刷新
+  const handleTabChange = (key: string) => {
+    setTabClick(key);
+    // 存储到 LocalStorage
+    localStorage.setItem('areaTabType', key);
+    console.log("key",key);
+    // 触发应用列表接口重新请求
+    if (mutate) {
+      mutate(); // 刷新应用列表（Agent/工作流/对话流）
+    }
+    // 如果插件列表也需要刷新（针对“插件”选项卡）
+    // if (key === '2' && pluginsMutate) {
+    //   pluginsMutate(); // 刷新插件列表
+    // }
+  };
   useEffect(() => {
     if (tenants) {
       const newArr: any = []
@@ -289,7 +311,7 @@ const AreaPage: React.FC<Props> = (props) => {
           <div style={{ paddingTop: '16px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <div>
               {
-                items.map(item => <Button style={{ marginRight: '16px', color: item.key === tabClick ? '#1677ff' : '', border: item.key === tabClick ? '1px solid #1677ff' : '1px solid rgb(217, 217, 217)' }} onClick={() => setTabClick(item.key)}>{item.label}</Button>)
+                items.map(item => <Button style={{ marginRight: '16px', color: item.key === tabClick ? '#1677ff' : '', border: item.key === tabClick ? '1px solid #1677ff' : '1px solid rgb(217, 217, 217)' }} onClick={() => handleTabChange(item.key)}>{item.label}</Button>)
               }
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
