@@ -67,13 +67,13 @@ const AreaPage: React.FC<Props> = (props) => {
     localStorage.setItem('areaTabType', key);
     console.log("key",key);
     // 触发应用列表接口重新请求
-    if (mutate) {
+    if ((key==='1' || key==='3' || key==='5') && mutate) {
       mutate(); // 刷新应用列表（Agent/工作流/对话流）
     }
     // 如果插件列表也需要刷新（针对“插件”选项卡）
-    // if (key === '2' && pluginsMutate) {
-    //   pluginsMutate(); // 刷新插件列表
-    // }
+    if (key === '2' && pluginsMutate) {
+      pluginsMutate(); // 刷新插件列表
+    }
   };
   useEffect(() => {
     if (tenants) {
