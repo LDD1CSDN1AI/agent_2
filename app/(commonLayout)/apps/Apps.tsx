@@ -92,11 +92,11 @@ const Apps = () => {
   const [activeTab, setActiveTab] = useTabSearchParams({
     defaultTab: 'all',
   })
-
+  const [currentManualPage, setCurrentManualPage] = useState(1);
   useEffect(() => {
     getTenantsParam();
   }, []);
-
+  const [currentTabClick, setTcurrentTabClick] = useState<string>('1'); // 默认值设为'1'
   const [isUrlReady, setIsUrlReady] = useState(false); // 用于判断URL和参数是否准备好
   const [activeId, setActiveId] = useState('')
   const [activeArea, setActiveArea] = useState<string>('')
@@ -104,23 +104,26 @@ const Apps = () => {
   const [options, optionsdata] = useState<any['options']>([]);
   const [showSider, setShowSider] = useState(true)
   const [usersuper, eatusersuper] = useState(false)
+  // 1. 定义与子组件一致的每页条数（可硬编码/引用全局常量）
+const AREA_PAGE_SIZE = 20; // 与子组件目标 PAGE_SIZE 一致
   const getKey = (
     pageIndex: number,
     previousPageData: AppListResponse,
     activeTab: string,
     tags: string[],
-    activeId: any
+    activeId: any,
+    
   ) => {
       // 从 LocalStorage 读取 tabClick
-    const currentTabClick = typeof window !== 'undefined' 
-    ? localStorage.getItem('areaTabType') || '1' 
-    : '1';
+    // const currentTabClick = typeof window !== 'undefined' 
+    // ? localStorage.getItem('areaTabType') || '1' 
+    // : '1';
     if (!pageIndex || previousPageData.has_more) {
       const params: any = {
         url: '/apps',
         params: {
           page: pageIndex + 1,
-          limit: activeTab === 'area' || activeTab === 'workSpaceSecondPage' ? 100 : 9,
+          limit: activeTab === 'area' || activeTab === 'workSpaceSecondPage' ? AREA_PAGE_SIZE : 9,
         },
       };
 
@@ -128,9 +131,7 @@ const Apps = () => {
 
 
 
-      if (category === 'workSpaceSecondPage') {
-        params.params.tenant_id = activeId.id || tenantId;
-      }
+
 
       if (activeTab !== 'area' && activeTab !== 'chat') {
         params.params.mode = activeTab === 'share-chat' ? tabClick : activeTab;
@@ -158,7 +159,24 @@ const Apps = () => {
         delete params.params;
       }
 
-
+      if (activeTab === 'workSpaceSecondPage') {
+        console.log("22222222222222222222222222activeTab",activeTab,"currentTabClick",currentTabClick);
+        params.params.tenant_id = activeId.id || tenantId;
+        
+        switch (currentTabClick) {
+          case '1': // Agent 标签页
+            params.params.app_mode = 'agent-chat';
+            break;
+          case '3': // 工作流标签页
+            params.params.app_mode = 'workflow';
+            break;
+          case '5': // 对话流标签页
+            params.params.app_mode = 'advanced-chat';
+            break;
+          default:
+            break;
+        }
+      }
 
       console.log("activeTab------------------------>",activeTab)
     
@@ -175,13 +193,13 @@ const Apps = () => {
         // 根据标签页类型添加 mode 筛选
         switch (currentTabClick) {
           case '1': // Agent 标签页
-            params.params.mode = 'agent-chat';
+            params.params.app_mode = 'agent-chat';
             break;
           case '3': // 工作流标签页
-            params.params.mode = 'workflow';
+            params.params.app_mode = 'workflow';
             break;
           case '5': // 对话流标签页
-            params.params.mode = 'advanced-chat';
+            params.params.app_mode = 'advanced-chat';
             break;
           default:
             break;
@@ -207,6 +225,67 @@ const Apps = () => {
   }, [setQuery])
 
   const { data: dcoosList, mutate: dcoosListMutate } = useSWR((GlobalUrl.platform_type === 'shufa' ? GlobalUrl.defaultUrlIp : GlobalUrl.wangyun_defaultUrlIp_agent_platform) + `/interface/api/api-info?page_index=1&page_size=999&create_by=${userProfile?.employee_number}`, fetchDcoosList)
+  
+  // ===================== 核心改造：新增插件专属SWR请求（适配新接口） =====================
+  // 1. 插件新接口参数构造（参考Agent/工作流逻辑，复用fetchAppList）
+  const getPluginAppKey = (
+    pageIndex: number,
+    previousPageData: any,
+    activeArea: string,
+  ) => {
+    if (!activeArea) return null; // 无活跃空间时不发起请求
+  
+    // 初始化params变量（提升作用域）
+    let params: any = null;
+  
+    // 对应新接口：http://localhost:5003/console/api/plugin_apps?page=1&limit=100&tenant_id=xxx&mode=workSpaceSecondPage&app_mode=api
+    if (!pageIndex || previousPageData?.has_more) {
+      params = {
+        url: '/plugin_apps', // 新插件接口
+        params: {
+          page: pageIndex + 1, // 动态页码（pageIndex 从 0 开始，接口通常从 1 开始）
+          limit: AREA_PAGE_SIZE, // 可改为动态变量（如从配置或状态中获取）
+          // mode: 'workSpaceSecondPage',
+          app_mode: 'api',
+        },
+      };
+  
+      // 在if块内部添加tenant_id，确保params已定义
+      if (activeArea) {
+        params.params.tenant_id = activeArea;
+      }
+    }
+  
+    return params; // 此时params要么是if块中定义的对象，要么是初始值null
+  };
+
+  // 2. 插件数据请求（复用fetchAppList，与Agent/工作流保持一致）
+// 插件数据请求（确保使用正确的 fetch 函数）
+// 2. 插件数据请求（保持原有逻辑，无需额外配置）
+const {
+  data: pluginAppsData,
+  mutate: pluginAppsMutate,
+  // isLoading: isPluginAppsLoading,
+  setSize: setPluginAppsSize, // 仅用于确保加载对应页码数据
+} = useSWRInfinite(
+  (pageIndex: number, previousPageData: any) => 
+    getPluginAppKey(pageIndex, previousPageData, activeArea),
+  fetchAppList,
+  { 
+    revalidateFirstPage: true,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  }
+);
+
+  // 3. 兼容原有插件请求（可保留，也可直接替换为新插件数据）
+  // const { data: plugins, mutate: oldPluginsMutate } = useSWR(
+  //   activeArea ? `/workspaces/current/tool-providers?tenant_id=${activeArea}` : null,
+  //   fetchPluginProviders
+  // );
+  // =====================================================================================
+
+
   const { data: plugins, mutate: pluginsMutate } = useSWR(
     activeArea ? `/workspaces/current/tool-providers?tenant_id=${activeArea}` : null,
     fetchPluginProviders
@@ -215,11 +294,23 @@ const Apps = () => {
   const { data: builtinPlugins, mutate: builtinPluginsMutate } = useSWR('/workspaces/current/tools/builtin/flat', fetchInstallPlugin)
   const { data, isLoading, size, setSize, mutate } = useSWRInfinite(
     (pageIndex: number, previousPageData: AppListResponse) => {
-      if (!isUrlReady) return null; // 当 isUrlReady 为 false 时，返回 null
-      return getKey(pageIndex, previousPageData, activeTab, tagIDs, activeId);
+      console.log("isUrlReady",isUrlReady);
+      if (!isUrlReady)// 当 isUrlReady 为 false 时，返回 null
+      {
+        return null;
+      } else {
+        console.log("pageIndex",pageIndex);
+        return getKey(pageIndex, previousPageData, activeTab, tagIDs, activeId);
+        
+    }
     },
     fetchAppList,
-    { revalidateFirstPage: true }
+    { 
+      revalidateFirstPage: false, // 关闭第一页自动重验证，核心优化
+      revalidateOnFocus: false, // 失去焦点返回时，不自动重验证
+      revalidateOnReconnect: false, // 网络重连时，不自动重验证
+      dedupingInterval: 3000, // 3秒内相同请求去重，避免重复调用
+    }
   );
 
   // 其他代码保持不变
@@ -378,18 +469,22 @@ const Apps = () => {
     }
   }, [])
 
-  const hasMore = data?.at(-1)?.has_more ?? true
-  useEffect(() => {
-    let observer: IntersectionObserver | undefined
-    if (anchorRef.current) {
-      observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && !isLoading && hasMore)
-          setSize((size: number) => size + 1)
-      }, { rootMargin: '100px' })
-      observer.observe(anchorRef.current)
-    }
-    return () => observer?.disconnect()
-  }, [isLoading, setSize, anchorRef, mutate, hasMore])
+  // const hasMore = data?.at(-1)?.has_more ?? true
+  
+// 判断是否还有更多数据
+console.log("data?.[0]?.has_more:",data?.[0]?.has_more)
+const hasMore = data?.[0]?.has_more;
+  // useEffect(() => {
+  //   let observer: IntersectionObserver | undefined
+  //   if (anchorRef.current) {
+  //     observer = new IntersectionObserver((entries) => {
+  //       if (entries[0].isIntersecting && !isLoading && hasMore)
+  //         setSize((size: number) => size + 1)
+  //     }, { rootMargin: '100px' })
+  //     observer.observe(anchorRef.current)
+  //   }
+  //   return () => observer?.disconnect()
+  // }, [isLoading, setSize, anchorRef, mutate, hasMore])
 
   useEffect(() => {
     // 检查URL及参数是否准备好
@@ -420,7 +515,11 @@ const Apps = () => {
       case 'all':
         return <AllPage data={data} />
       case 'area':
-        return <AreaPage data={data?.[0]} plugins={plugins ?? []} mutate={mutate} pluginsMutate={pluginsMutate} setActiveTab={setActiveTab} setCallback={setActiveArea} />
+        // return <AreaPage data={data?.[0]} plugins={plugins ?? []} mutate={mutate} pluginsMutate={pluginsMutate} setActiveTab={setActiveTab} setCallback={setActiveArea} setSize={setSize}/> plugins={plugins ?? []}
+        return <AreaPage appData={data} currentManualPage={currentManualPage} setCurrentManualPage={setCurrentManualPage} totalItems={data?.[currentManualPage - 1]?.total || 0} currentPage={size} plugins={pluginAppsData || []}  mutate={mutate} pluginsMutate={pluginAppsMutate} setPluginAppsSize={setPluginAppsSize}
+        setActiveTab={setActiveTab} setCallback={setActiveArea} setSize={setSize} pageSize={AREA_PAGE_SIZE} currentTabClick={currentTabClick}
+        setTcurrentTabClick={setTcurrentTabClick} />
+   
       case 'workflow':
         return <WorkflowPage size={size} setSize={setSize} data={data?.[size - 1]} mutate={mutate} setCallback={setActiveArea} />
       case 'agent-chat':
@@ -446,7 +545,36 @@ const Apps = () => {
       case 'release':
         return <ReleaseManager data={data?.[0]} mutate={mutate} setActiveTab={setActiveTab} />
       case 'workSpaceSecondPage':
-        return <WorkSpaceSecondPage data={data?.[0]} plugins={plugins ?? []} setActiveTab={setActiveTab} mutate={mutate} setCallback={setActiveArea} pluginsMutate={pluginsMutate} />
+        // return <WorkSpaceSecondPage data={data?.[0]} plugins={plugins ?? []} setActiveTab={setActiveTab} mutate={mutate} setCallback={setActiveArea} pluginsMutate={pluginsMutate} />
+        return <WorkSpaceSecondPage
+            // 1. 分页核心：父组件页码（同步子组件）
+            currentManualPage={currentManualPage}
+            // 2. 分页核心：页码更新方法（子组件同步父组件页码）
+            setCurrentManualPage={setCurrentManualPage}
+            // 3. 分页核心：总条数（优先传递，避免子组件重复计算）
+            totalItems={data?.[currentManualPage - 1]?.total || 0}
+            // 4. 分页核心：通知父组件加载对应页码数据
+            setSize={setSize}
+            // 5. 分页核心：每页条数（与父组件 AREA_PAGE_SIZE 保持一致）
+            pageSize={AREA_PAGE_SIZE}
+            // 6. 业务数据：分页分段数据（数组套数组，每一项对应一页）
+            data={data}
+            // 7. 插件数据：分页分段的插件数据（复用已有的 pluginAppsData）
+            plugins={pluginAppsData || []}
+            // 8. 业务数据刷新方法（携带分页参数）
+            mutate={mutate}
+            // 9. 插件数据刷新方法
+            pluginsMutate={pluginAppsMutate}
+            // 10. 插件页码加载方法（通知父组件加载插件对应页码）
+            setPluginSize={setPluginAppsSize}
+              // 补充：插件总条数传递（避免子组件重复计算，提升性能）
+            pluginTotalItems={pluginAppsData?.[currentManualPage - 1]?.total || 0}
+            // 11. 原有业务属性保留
+            setActiveTab={setActiveTab}
+            setCallback={setActiveArea}
+            currentTabClick = {currentTabClick}
+            setTcurrentTabClick = {setTcurrentTabClick}
+          />
       case 'super-manager':
         return <ManagerPage />
       case 'project-member':
@@ -496,6 +624,13 @@ const Apps = () => {
     }
   }
   const setCurrentMenu = (item: any) => {
+
+    // 先判断是否是个人空间(area)或项目空间(projectSpace)
+    const targetKey = item.keyPath[0];
+    if (targetKey === 'area' || targetKey === 'projectSpace') {
+      setTcurrentTabClick('1'); // 重置为"1"
+      setCurrentManualPage(1); // 可选：同步重置页码为第一页
+    }
 
     if (item.key === 'operationsPlatform') {
       const url = GlobalUrl.agent_operation_platform + `/logs?name=${userProfile.name}&console_token=${localStorage.getItem('console_token')}&employee_number=${userProfile?.employee_number}`;
